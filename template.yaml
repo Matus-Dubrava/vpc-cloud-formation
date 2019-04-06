@@ -11,3 +11,12 @@ Resources:
                   Value: MyVPC
                 - Key: Environment
                   Value: Testing
+    MySubnet2c:
+        Type: AWS::EC2::Subnet
+        Properties:
+            AvailabilityZone: us-east-1c
+            CidrBlock: '10.0.0.0/24'
+            Tags:
+                - Key: Name
+                  Value: MySubnet2c
+            VpcId: !Ref MyVPC
