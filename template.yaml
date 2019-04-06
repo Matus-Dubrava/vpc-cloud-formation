@@ -1,10 +1,29 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: VPC N. Virginia
+
+Parameters:
+    VPCCIDR:
+        Type: String
+        Default: '10.0.0.0/16'
+        Description: The CIDR range to assign to the VPC
+        # AllowedPattern: '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\./[0-9]{1,2}'
+        # ConstraintDescription: An IPv4 block in CIDR notation is required, e.g. 10.0.0.0/16
+    SubnetAZ:
+        Type: AWS::EC2::AvailabilityZone::Name
+        Default: us-east-1c
+        Description: The availability zone to assign to the subnet
+    SubnetCIDR:
+        Type: String
+        Default: '10.0.0.0/24'
+        Description: The CIDR range to assign to the subnet
+        # AllowedPattern: "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\./[0-9]{1,2}"
+        # ConstraintDescription: An IPv4 block in CIDR notation is required, e.g. 10.0.0.0/24
+
 Resources:
     MyVPC:
         Type: AWS::EC2::VPC
         Properties:
-            CidrBlock: '10.0.0.0/16'
+            CidrBlock: !Ref VPCCIDR
             InstanceTenancy: default
             Tags:
                 - Key: Name
@@ -14,8 +33,8 @@ Resources:
     MySubnet2c:
         Type: AWS::EC2::Subnet
         Properties:
-            AvailabilityZone: us-east-1c
-            CidrBlock: '10.0.0.0/24'
+            AvailabilityZone: !Ref SubnetAZ
+            CidrBlock: !Ref SubnetCIDR
             Tags:
                 - Key: Name
                   Value: MySubnet2c
