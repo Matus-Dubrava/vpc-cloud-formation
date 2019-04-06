@@ -29,3 +29,10 @@ Resources:
         Properties:
             RouteTableId: !Ref MyRouteTable
             SubnetId: !Ref MySubnet2c
+    MyInternetGateway:
+        Type: AWS::EC2::InternetGateway
+    MyGatewayAttachment:
+        Type: AWS::EC2::VPCGatewayAttachment
+        Properties:
+            VpcId: !Ref MyVPC
+            InternetGatewayId: !Ref MyInternetGateway
