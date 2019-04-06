@@ -36,3 +36,10 @@ Resources:
         Properties:
             VpcId: !Ref MyVPC
             InternetGatewayId: !Ref MyInternetGateway
+    MyDefaultRoute:
+        Type: AWS::EC2::Route
+        DependsOn: MyGatewayAttachment
+        Properties:
+            DestinationCidrBlock: '0.0.0.0/0'
+            GatewayId: !Ref MyInternetGateway
+            RouteTableId: !Ref MyRouteTable
