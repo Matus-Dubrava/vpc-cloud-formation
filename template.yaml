@@ -20,3 +20,12 @@ Resources:
                 - Key: Name
                   Value: MySubnet2c
             VpcId: !Ref MyVPC
+    MyRouteTable:
+        Type: AWS::EC2::RouteTable
+        Properties:
+            VpcId: !Ref MyVPC
+    MySubnet2cRouteTableAssociation:
+        Type: AWS::EC2::SubnetRouteTableAssociation
+        Properties:
+            RouteTableId: !Ref MyRouteTable
+            SubnetId: !Ref MySubnet2c
